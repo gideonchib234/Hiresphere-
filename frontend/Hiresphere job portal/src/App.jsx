@@ -3,6 +3,7 @@ import {BrowserRouter as
   Route, 
   Routes, Navigate} from "react-router-dom";
 import {Toaster } from "react-hot-toast"; 
+import { AuthProvider } from "./context/authcontext.jsx";
   
 import Landingpage from "./Pages/Landingpage/landingPage.jsx";
 import Signup from "./Pages/Auth/signup.jsx";
@@ -23,34 +24,37 @@ import ProtectedRoute from "./Routes/ProtectedRoutes.jsx";
 
 const App = () => {
   return <div>
-
 <Router>
-  <Routes>
-     {/*Public routes */}
-     <Route path="/" element={<Landingpage/>}/>
-     <Route path="Signup" element={<Signup/>}/>
-      <Route path="Login" element={<Login/>}/>
+  <AuthProvider>
+    <Routes>
+       {/*Public routes */}
+       <Route path="/" element={<Landingpage/>}/>
+       <Route path="/signup" element={<Signup/>}/>
+       <Route path="/login" element={<Login/>}/>
 
-      {/*Jobseeker routes */}
-      <Route path="jobseeker-dashboard" element={<JobseekerDashboard/>}/>
-      <Route path="jobseeker-profile" element={<UserProfile/>}/>
-      <Route path="jobseeker-savedjobs" element={<SavedJobs/>}/>
-      <Route path="jobseeker-JobseekerDetails" element={<JobseekerDetails/>}/> 
+       {/*Protected Jobseeker routes */}
+       <Route element={<ProtectedRoute requiredRole="jobseeker"/>}>
+         <Route path="/jobseeker-dashboard" element={<JobseekerDashboard/>}/>
+         <Route path="/jobseeker-profile" element={<UserProfile/>}/>
+         <Route path="/jobseeker-savedjobs" element={<SavedJobs/>}/>
+         <Route path="/jobseeker-details" element={<JobseekerDetails/>}/> 
+       </Route>
 
-      {/*protected Employer Routes*/}
-      <Route element={<ProtectedRoute requiredRole="employer">
-        <Route path="employer-dashboard" element={<EmployerDashboard/>}/>
-        <Route path="Employer-profile" element={<EmployerProfile/>}/>
-        <Route path="employer-jobpostingform" element={<JobPostingForm/>}/>
-        <Route path="employer-managejobs" element={<ManageJobs/>}/>
-        <Route path="employer-applicationviewer" element={<ApplicationViewer/>}/>
-        <Route path="employer-editprofiledetail" element={<EditprofileDetail/>}/>
-      </ProtectedRoute>}/>
+       {/*Protected Employer Routes*/}
+       <Route element={<ProtectedRoute requiredRole="employer"/>}>
+         <Route path="/employer-dashboard" element={<EmployerDashboard/>}/>
+         <Route path="/employer-profile" element={<EmployerProfile/>}/>
+         <Route path="/employer-jobpostingform" element={<JobPostingForm/>}/>
+         <Route path="/employer-managejobs" element={<ManageJobs/>}/>
+         <Route path="/employer-applicationviewer" element={<ApplicationViewer/>}/>
+         <Route path="/employer-editprofiledetail" element={<EditprofileDetail/>}/>
+       </Route>
 
-      { /* Catch all Routes */}
-      <Route path="*" element={<Navigate to="/"/>}/>
+       { /* Catch all Routes */}
+       <Route path="*" element={<Navigate to="/"/>}/>
 
-  </Routes>
+    </Routes>
+  </AuthProvider>
 </Router>    
     <Toaster
     toastOptions={{

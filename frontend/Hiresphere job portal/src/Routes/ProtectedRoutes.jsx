@@ -1,11 +1,23 @@
 import React from "react";
-import { Navigate, Outlet, useLocation } from "react-router-dom";
+import { Navigate, Outlet } from "react-router-dom";
+import { useAuth } from "../context/authcontext.jsx";
 
-const ProtectedRoutes = ({requiredRole }) => {                           
-    return (  
+const ProtectedRoute = ({ requiredRole }) => {
+  const { isAuthenticated, userRole, loading } = useAuth();
 
-        <Outlet />
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
-    ) ;
-}
-export default ProtectedRoutes;   
+  if (!isAuthenticated) {
+    return <Navigate to="/login" replace />;
+  }
+
+  if (requiredRole && userRole !== requiredRole) {
+    return <Navigate to="/" replace />;
+  }
+
+  return <Outlet />;
+};
+
+export default ProtectedRoute;   

@@ -7,3 +7,5 @@ const JobseekerDetails = () => {
         </div>
     )
 }
+
+export default JobseekerDetails;

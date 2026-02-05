@@ -80,30 +80,34 @@ const HeroSection = () => {
                     initial={{opacity: 0, y: 30}}
                     animate={{opacity: 1, y: 0}}
                     transition={{delay: 0.6, duration: 0.8 }}
-                    className=''
+                    className='grid grid-cols-1 md:grid-cols-3 gap-8 max-w-2xl mx-auto'
                     >
                         {stats.map((stat, index) => (
                             <motion.div
                             initial={{opacity: 0, y: 20}}
                             animate={{opacity: 1, y: 0}}
                             transition={{delay: 0.6 + index * 0.2, duration: 0.8 }}
-                            className=''
+                            className='flex flex-col items-center space-y-2 p-4 rounded-xl 
+                            hover:bg-gray-50 transition-colors'
                             >
-                                <div className=''>
-                                    <stat.icon className=''/>
+                                <div className='w-12 h-12 bg-gradient-to-r from-blue-100 to purple-100 rounded-xl flex items-center justify-center mb-0.5'>
+                                    <stat.icon className='w-6 h-6 text-blue-600'/>
                                 </div>
-                                <div className=''>{stat.value}</div>
-                                <div className=''>{stat.label}</div>
+                                <div className='text 2xl font-bold text-gray-900'>{stat.value}</div>
+                                <div className='text-sm text-gray-500 font-medium'>{stat.label}</div>
                             </motion.div>
                         ))}
                  </motion.div>
                 </div>      
             </div>
 
-            <div className=''>
-             <div clas sName=''/>
-            <div className=''/>
+            <div className='absolute inset-0 overflow-hidden pointer-events-none'>
+             <div className='absolute top-20 left-10 w-32 h-32 bg-blue-100 rounded-full blur-3xl opacity-30'/>
+            <div className='absolute bottom-20 right-10 w-40 h-40 bg-purple-100 rounded-full blur-3xl opacity-30'/>
+            <div className='absolute top-1/2 left-1/2 transform -translate-x-1/2 translate-y-1/2 w-96 h-96 bg-gradient-to-r from-blue-50 to-purple-50 rounded-full blur-3xl 
+            opacity-20'/>
             </div>
+
 
         </section>
                     

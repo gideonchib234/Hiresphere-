@@ -33,7 +33,7 @@ const App = () => {
        <Route element={<ProtectedRoute requiredRole="jobseeker"/>}>
          <Route path="/jobseeker-dashboard" element={<JobseekerDashboard/>}/>
          <Route path="/jobseeker-profile" element={<UserProfile/>}/>
-         <Route path="/jobseeker-savedjobs" element={<SavedJobs/>}/>
+         <Route path="/savedjobs" element={<SavedJobs/>}/>
          <Route path="/jobseeker-details" element={<JobseekerDetails/>}/> 
        </Route>
 

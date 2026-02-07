@@ -9,11 +9,16 @@ const Header = () => {
     const navigate = useNavigate();
 
     return (
-        <header className="bg-white border-b border-gray-200">
+        <motion.header
+        initial={{ y: -50, opacity: 0}}
+        animate= {{y: 0, opacity: 1}}
+        transition={{duration: 0.6}}
+        className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-b border-gray-100"
+         >
         <div className="container mx-auto px-4">
             <div className="flex items-center justify-between h-16">
                 <div className="flex items-center space-x-2">
-            <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center">
+            <div className="w-8 h-8 bg-linear-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center">
               <Briefcase className="w-5 h-5 text-white" />
           </div>
             <span className="text-xl font-bold text-gray-900">Hiresphere</span>
@@ -37,7 +42,7 @@ const Header = () => {
                                 ? "/employer-dashboard"
                                 : "/jobseeker-dashboard"
                         
-                            }   className="px-4 py-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg hover:from-purple-700 hover:to-indigo-700 transition">
+                            }   className="px-4 py-2 bg-linear-to-r from-blue-600 to-purple-600 text-white rounded-lg hover:from-purple-700 hover:to-indigo-700 transition">
                                 Dashboard
                             </a>
                         </div>
@@ -48,7 +53,7 @@ const Header = () => {
                             Login
                         </a>
                         <a href="/signup"
-                            className="px-4 py-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg hover:from-purple-700 hover:to-indigo-700 transition"> 
+                            className="px-4 py-2 bg-linear-to-r from-blue-600 to-purple-600 text-white rounded-lg hover:from-purple-700 hover:to-indigo-700 transition"> 
                             Sign Up
                         </a>
                         </>
@@ -57,7 +62,7 @@ const Header = () => {
             </div>
         </div>
         </div>
-        </header>
+        </motion.header>
     );
 }
 

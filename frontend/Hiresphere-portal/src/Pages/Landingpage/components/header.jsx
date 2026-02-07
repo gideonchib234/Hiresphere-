@@ -22,7 +22,7 @@ const Header = () => {
               <Briefcase className="w-5 h-5 text-white" />
           </div>
             <span className="text-xl font-bold text-gray-900">Hiresphere</span>
-        </div>
+        </div>    
             <div className="flex items-center space-x-6">
                 <nav className="hidden md:flex space-x-6">
                     <a onClick={() => navigate("/jobseeker")} className="text-gray-700 hover:text-blue-600 cursor-pointer transition">Find jobs</a>

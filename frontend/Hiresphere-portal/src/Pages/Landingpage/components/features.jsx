@@ -17,6 +17,7 @@ const Feature = () => {
                     candidate, we have the tools and features to makee it happen.   
                 </p>
                 </div>
+                </div>
 
                 <div className='grid-md:grid-cols-2 gap-16 lg:gap-24'>
                 {/*Job seekers section*/}
@@ -25,32 +26,67 @@ const Feature = () => {
                     <h3 className='text-3xl font-bold text-gray-900 mb-4'>
                         For Job seeker
                     </h3>
+                    <div className='w-24 h-1 bg-linear-to-r from-blue-500 to-blue-600 mx-auto rounded-full'>
                 </div>
 
-                <div className='w-24 h-1 bg-linear-to-r from-blue-500 to-blue-600 mx-auto rounded-full'>
+                <div className='space-y-8'>
                   {JobseekerFeatures.map((feature, index) =>(
                     <div
                     key={index}
-                    className=''
-                    >
-                        <div className=''>
-                         <feature.icon className=''/>
+                    className='group flex items-start space-x-4 p-6 rounded-2xl hover:bg-blue-50 
+                    transition-all duration-300 cursor-pointer'   >
+                        <div className='shrink-0 w-12 h-12 bg-blue-100 rounded-xl flex items
+                        justify-center text-blue-600 group-hover:bg-blue-200 transition-all duration-300'>
+                         <feature.icon className='w-6 h-6 text-blue-600'/>
                          </div>
                          <div>
-                            <h4 className=''>
+                            <h4 className='text-xl font-semibold text-gray-900 mb-2'>
                                 {feature.title}
                                 </h4>
-                                <p className=''>
+                                <p className='text-gray-600 leading-relaxed'>
                                   {feature.description}  
                                 </p>
-                                </div>
-                                </div>
+                            </div>
+                         </div>
                   ))}
                   </div>
               </div>
+
+              {/*Employers section */}
+              <div>
+                <div className='text-center mb-12'>
+                  <h3 className='text-3xl text-gray-900 mb-4'>
+                    For Employers
+                    </h3>
+                    <div className='w-24 h-1 bg-linear-to-r from-purple-500 to-purple-600 mx-auto rounded-full
+                    '>
+                        </div>
+                </div>
+                <div className='space-y-8'>
+                 {EmployerFeatures.map((feature, index) => (
+                    <div
+                      key={index}
+                      className='group flex items-start space-x-4 p-6 rounded-2xl
+                      hover:bg-purple-50 transition-all duration-300 cursor-pointer'
+                      >
+                     <div className='shrink-0 w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center 
+                     group-hover:bg-blue-200 transition-all duration'>
+                        <feature.icon className='w-6 h-6 text-blue-600'/>
+                        </div>
+                        <div>
+                            <h4 className='text-xl font-semibold text-gray-900 mb-2'>
+                                {feature.title}
+                            </h4>
+                            <p className='text-gray-600 leading-relaxed'>
+                                {feature.description}
+                            </p>
+                        </div>
+                    </div>
+                 ))}
            </div>
          </div>
-      </section>
-    )
-}
+        </div>
+    </div>
+</section>
+   ) }
 export default Feature  

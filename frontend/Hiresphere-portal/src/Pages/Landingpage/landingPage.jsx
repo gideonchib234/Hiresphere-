@@ -8,6 +8,7 @@ const Landingpage = () => {
             <Header/>
             <HeroSection/>
             <Feature/>
+            <Analytics/>
         </div>
     );
 };

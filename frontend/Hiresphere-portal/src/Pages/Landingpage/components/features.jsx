@@ -7,9 +7,9 @@ const Feature = () => {
     <section className='py-20 bg-white relative overflow-hidden'>
       <div className='container mx-auto px-4 relative z-10'>
         <div className='text-center mb-16'>
-          <h2 className='text-4xl md:text-5xl font-bold text-gray-500'>
+            <h2 className='text-4xl md:text-5xl font-bold text-gray-500'>
             Everything you need to
-            <span className='block bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent'>
+            <span className='block bg-linear-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent'>
               Succeed
             </span>
           </h2>
@@ -24,7 +24,7 @@ const Feature = () => {
           <div>
             <div className='text-center mb-12'>
               <h3 className='text-3xl font-bold text-gray-900 mb-4'>For Job seekers</h3>
-              <div className='w-24 h-1 bg-gradient-to-r from-blue-500 to-blue-600 mx-auto rounded-full' />
+              <div className='w-24 h-1 bg-linear-to-r from-blue-500 to-blue-600 mx-auto rounded-full' />
             </div>
 
             <div className='space-y-8'>
@@ -49,7 +49,7 @@ const Feature = () => {
           <div>
             <div className='text-center mb-12'>
               <h3 className='text-3xl font-bold text-gray-900 mb-4'>For Employers</h3>
-              <div className='w-24 h-1 bg-gradient-to-r from-purple-500 to-purple-600 mx-auto rounded-full' />
+              <div className='w-24 h-1 bg-linear-to-r from-purple-500 to-purple-600 mx-auto rounded-full' />
             </div>
 
             <div className='space-y-8'>

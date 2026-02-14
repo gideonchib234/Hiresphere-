@@ -22,7 +22,7 @@ const Footer = () => {
                             </p> 
                     </div>
                     {/*Copyright*/}
-                    <div className="">
+                    <div className="space-y-2">
                         <p className={`text-sm text-gray-600 `}>
                             &copy; {new Date().getFullYear()}Gibson technologies
                         </p>
@@ -36,3 +36,5 @@ const Footer = () => {
         </footer>
     )
 }
+
+export default Footer;

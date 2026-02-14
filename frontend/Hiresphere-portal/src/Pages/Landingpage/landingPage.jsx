@@ -6,7 +6,7 @@ import Feature from "./components/features";
 import Footer from "./components/footer";
 const Landingpage = () => {
     return (
-        <div className="min-h-screen mb-[100vh]">
+        <div className="min-h-screen">
             <Header/>
             <HeroSection/>
             <Feature/>

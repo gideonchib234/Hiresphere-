@@ -8,17 +8,6 @@
   </head>
   <body>
     <div id="root"></div>
-    <script type="module">
-      import { injectIntoGlobalHook } from "/@react-refresh";
-      // ensure React Refresh preamble is available for HMR
-      try {
-        injectIntoGlobalHook(window);
-        window.$RefreshReg$ = window.$RefreshReg$ || (() => {});
-        window.$RefreshSig$ = window.$RefreshSig$ || (() => (type) => type);
-      } catch (e) {
-        // ignore in production or if import fails
-      }
-    </script>
     <script type="module" src="src/main.jsx"></script>
   </body>
 </html>

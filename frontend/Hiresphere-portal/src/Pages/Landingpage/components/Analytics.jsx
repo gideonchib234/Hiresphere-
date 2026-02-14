@@ -43,7 +43,7 @@ const Analytics = () => {
               >
                 <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
                     Platform
-                    <span className="bg-gradient-to-r from-blue-500 to-purple-600 bg-clip-text text-transperent">
+                    <span className="bg-linear-to-r from-blue-500 to-purple-600 bg-clip-text text-transparent">
                     Analytics
                     </span>
                 </h2>
@@ -62,18 +62,19 @@ const Analytics = () => {
                     whileInView={{opacity: 1, y: 0}}
                     transition={{delay: index * 0.1, duration: 0.6}}
                     viewport={{once: true}}
-                    className=""
+                    className="bg-white p-6 rounded-2xl shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300"
                   >
-                    <div className="">
+                    <div className="flex items-center justify-between mb-4">
                       <div className={`w-12 h-12 bg-${stat.color}-300 rounded-xl flex items-center justify-center`}>
                         <stat.icon className={`w-6 h-6 text-${stat.color}-600`}/>
                       </div>
-                      <span className="">
+                      <span className="text-green-800 text-sm font-semibold bg-green-50 px-20 py-1 rounded-full">
                         {stat.growth}
                       </span>
+
                     </div>
-                    <h3 className="">{stat.value}</h3>
-                    <p className="">{stat.title}</p>
+                    <h3 className="text-3xl font-bold text-gray-900 mb-5">{stat.value}</h3>
+                    <p className="text-gray-600">{stat.title}</p>
                   </motion.div>
                 ))}
             </div>

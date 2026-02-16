@@ -6,7 +6,6 @@ import {
   Lock,
   Upload,
   Eye,
-  Eyeoff,
   UserCheck,
   Building2,
   CheckCircle,

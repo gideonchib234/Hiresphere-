@@ -6,7 +6,8 @@ import { Mail,
    EyeOff,
     Loader, 
     AlertCircle, 
-    CheckCircle } from "lucide-react";
+    CheckCircle, 
+    Key} from "lucide-react";
 
 
 const Login = () => {
@@ -25,6 +26,7 @@ const Login = () => {
     if(!email.trim()) return "Email is required";
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email) ? "" : "Please enter a valid email";
+    r;
   };
   const validatePassword = (password) => {
     if (!password) return "Password is required"
@@ -32,19 +34,29 @@ const Login = () => {
   };
    const handleInputechange = (e) => {
     const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
-    if (formState.errors[name]) {
-      setFormState(prev => ({ ...prev, errors: 
-        { ...prev.errors, [name]: "" } 
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }))
+    if(formState.errors[name]) {
+      setFormState(prev => ({
+        ...prev,
+        errors: {... prev.errors, [name]: ""}
       }));
     }
-   };
+  };
    const validateForm = () => {
-    const errors = {};
-    if (!ValidaateEmail(formData.email)) errors.email = "Please enter a valid email";
-    if (!validatePassword(formData.password)) errors.password = "Password must be at least 6 characters";
+    const errors = {
+      email: ValidateEmail(formData.email),
+      password: validatePassword(formData.password)
+    };
+    object.keys(errors).forEach(key => {
+      if(!error[key]) delete errors[key];
+      
+    });
     setFormState(prev => ({ ...prev, errors }));
     return Object.keys(errors).length === 0;
+    
    };
     const handleSubmit = async (e) => {
       e.preventDefault();
@@ -55,7 +67,11 @@ const Login = () => {
         await new Promise(res => setTimeout(res, 700));
         setFormState(prev => ({ ...prev, loading: false, success: true }));
    } catch (err) {
-        setFormState(prev => ({ ...prev, loading: false }));
+        setFormState(prev => ({ ...prev, loading: false,
+        errors:{
+          submit:error.response?.data?.message || "Login failed please check your credentials."
+        }  
+         }));
       }
     };
     if(formState.success) {

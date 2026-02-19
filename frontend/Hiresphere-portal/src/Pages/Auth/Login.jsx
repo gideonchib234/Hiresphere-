@@ -8,9 +8,9 @@ import { Mail,
     AlertCircle, 
     CheckCircle, 
     Key} from "lucide-react";
+import { ValidateEmail } from "../Utils/helper";
 
-
-const Login = () => {
+const Login = () => { 
   const [formData, setFormData] = React.useState({
     email: "",
     password: ""
@@ -22,17 +22,12 @@ const Login = () => {
     showpassword: false,
     success: false
   });
-  const ValidaateEmail = (email) => {
-    if(!email.trim()) return "Email is required";
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email) ? "" : "Please enter a valid email";
-    r;
-  };
+  
   const validatePassword = (password) => {
     if (!password) return "Password is required"
     return "";
   };
-   const handleInputechange = (e) => {
+   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({
       ...prev,
@@ -50,13 +45,11 @@ const Login = () => {
       email: ValidateEmail(formData.email),
       password: validatePassword(formData.password)
     };
-    object.keys(errors).forEach(key => {
-      if(!error[key]) delete errors[key];
-      
+    Object.keys(errors).forEach(key => {
+      if(!errors[key]) delete errors[key];
     });
     setFormState(prev => ({ ...prev, errors }));
     return Object.keys(errors).length === 0;
-    
    };
     const handleSubmit = async (e) => {
       e.preventDefault();
@@ -64,14 +57,15 @@ const Login = () => {
       setFormState(prev => ({ ...prev, loading: true }));
       try {
         // Placeholder for actual submit logic
-        await new Promise(res => setTimeout(res, 700));
-        setFormState(prev => ({ ...prev, loading: false, success: true }));
-   } catch (err) {
+        setTimeout(() => {
+          setFormState(prev => ({ ...prev, loading: false, success: true }));
+        }, 2000);
+      } catch (err) {
         setFormState(prev => ({ ...prev, loading: false,
-        errors:{
-          submit:error.response?.data?.message || "Login failed please check your credentials."
-        }  
-         }));
+          errors:{
+            submit: err.response?.data?.message || "Login failed please check your credentials."
+          }
+        }));
       }
     };
     if(formState.success) {
@@ -115,7 +109,7 @@ const Login = () => {
               <div className="relative">
                 <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500"/>
              <input type="email" name="email" value={formData.email} 
-             onChange={handleInputechange}
+             onChange={handleInputChange}
              className={`w-full pl-10 pr-4 py-3 rounded-lg border 
               ${formState.errors.email ? 
               "border-red-500" : "border-gray-300"} 
@@ -142,7 +136,7 @@ const Login = () => {
           <input type={formState.showpassword ? "text" : "password"}
           name="password"
           value={formData.password}
-          onChange={handleInputechange}
+          onChange={handleInputChange}
           className={`w-full pl-10 pr-10 py-3 rounded-lg border
           ${formState.errors.password ? "border-red-500" : "border-gray-300"}
           focus:outline-none focus:ring-2
@@ -167,7 +161,7 @@ const Login = () => {
       </div>
       
       {/*Submit error message */}
-      {formState.submitError && (
+      {formState.errors.submit && (
         <div className="mt-4 p-3 bg-red-50 text-red-700 rounded-lg">
           <p className="text-sm">
             <AlertCircle className="w-4 h-4 mr-1 inline"/>

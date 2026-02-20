@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import {
-  User,
-  Mail,
+  User, Mail,
   Lock,
   Upload,
   Eye,
@@ -37,7 +36,8 @@ const Signup = () => {
     setFormData((prev) => ({ ...prev, [name]: value }));
 
     if (formState.errors[name]) {
-      setFormState((prev) => ({ ...prev, errors: { ...prev.errors, [name]: "" } }));
+      setFormState((prev) => ({ ...prev, errors: 
+        { ...prev.errors, [name]: "" } }));
     }
   };
 
@@ -266,10 +266,13 @@ const Signup = () => {
           <button
             type="submit"
             disabled={formState.loading}
-            className="w-full bg-linear-to-r from-blue-600 to-purple-700 text-white py-3 px-4 rounded-lg hover:opacity-95 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors disabled:opacity-50"
+            className="w-full bg-linear-to-r from-blue-600 to-purple-700 text-white py-3 
+            px-4 rounded-lg hover:opacity-95 focus:outline-none focus:ring-2
+             focus:ring-blue-500 transition-colors disabled:opacity-50"
           >
             {formState.loading ? (
               <>
+
                 <Loader className="animate-spin w-5 h-5 inline-block mr-2" /> Signing up...
               </>
             ) : (

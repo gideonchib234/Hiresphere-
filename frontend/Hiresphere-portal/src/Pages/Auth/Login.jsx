@@ -1,13 +1,14 @@
 import React from "react";
 import {motion} from "framer-motion";
 import { Mail,
-   Lock, 
-   Eye,
-   EyeOff,
-    Loader, 
-    AlertCircle, 
-    CheckCircle, 
-    Key} from "lucide-react";
+        Lock, 
+        Eye,
+       EyeOff,
+       Loader, 
+       AlertCircle, 
+       CheckCircle, 
+       Key
+  } from "lucide-react";
 import { ValidateEmail } from "../Utils/helper";
 
 const Login = () => { 
@@ -166,7 +167,7 @@ const Login = () => {
           <p className="text-sm">
             <AlertCircle className="w-4 h-4 mr-1 inline"/>
             {formState.errors.submit}
-            </p>
+          </p>
         </div>
       )}
       <button type="submit" disabled={formState.loading} 

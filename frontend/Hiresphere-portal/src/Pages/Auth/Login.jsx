@@ -1,5 +1,6 @@
 import React from "react";
 import {motion} from "framer-motion";
+import { useNavigate } from "react-router-dom";
 import { Mail,
         Lock, 
         Eye,
@@ -23,6 +24,7 @@ const Login = () => {
     showpassword: false,
     success: false
   });
+  const navigate = useNavigate();
   
   const validatePassword = (password) => {
     if (!password) return "Password is required"
@@ -160,6 +162,12 @@ const Login = () => {
           </p>
         )}
       </div>
+        {/* Forgot password link */}
+        <div className="flex justify-end mt-2">
+          <button type="button" onClick={() => navigate("/forgot-password", { state: { email: formData.email } })} className="text-sm text-blue-600 hover:underline font-medium">
+            Forgot password?
+          </button>
+        </div>
       
       {/*Submit error message */}
       {formState.errors.submit && (

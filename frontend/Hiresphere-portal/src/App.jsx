@@ -5,6 +5,8 @@ import { AuthProvider } from "./context/authcontext.jsx";
 import Landingpage from "./Pages/Landingpage/landingPage.jsx";
 import Signup from "./Pages/Auth/signup.jsx";
 import Login from "./Pages/Auth/Login.jsx";
+import ForgotPassword from "./Pages/Auth/ForgotPassword.jsx";
+import ResetPassword from "./Pages/Auth/ResetPassword.jsx";
 import JobseekerDashboard from "./Pages/Jobseeker/jobseekerDashboard.jsx";
 import UserProfile from "./Pages/Jobseeker/Userprofile.jsx";
 import SavedJobs from "./Pages/Jobseeker/Savedjobs.jsx";
@@ -28,6 +30,8 @@ const App = () => {
        <Route path="/" element={<Landingpage/>}/>
        <Route path="/signup" element={<Signup/>}/>
        <Route path="/login" element={<Login/>}/>
+      <Route path="/forgot-password" element={<ForgotPassword/>}/>
+      <Route path="/reset-password" element={<ResetPassword/>}/>
 
        {/*Protected Jobseeker routes */}
        <Route element={<ProtectedRoute requiredRole="jobseeker"/>}>

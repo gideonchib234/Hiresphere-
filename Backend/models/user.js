@@ -29,6 +29,12 @@ const userSchema = mongoose.Schema ({
     companyLogo: String,
 },{timestamps: true});
 
+// Fields for password reset OTP
+userSchema.add({
+    resetOTP: String,
+    resetOTPExpires: Date,
+});
+
 //Encrypt password before save 
 userSchema.pre("save", async function (next) {
  if(!this.isModified("password")) return next();

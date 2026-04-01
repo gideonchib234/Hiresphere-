@@ -1,5 +1,5 @@
 const express = require("express");
-const {register, login, getme } = require("../controllers/authcontroller");
+const {register, login, getme, verifyOtpAndReset } = require("../controllers/authcontroller");
 const {protect} = require("../Middleware/Authmiddleware");
 const upload = require("../Middleware/uploadmiddleware")
 
@@ -16,5 +16,5 @@ router.post("/upload-image", upload.single("image"), (req, res) => {
     const imageUrl = `${req.protocol}://${req.get('host')}/uploads/${req.file.filename}`;
     res.status(200).json({ imageUrl });
 });
-
+router.put("/forgotpassword", verifyOtpAndReset);
 module.exports = router;

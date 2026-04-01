@@ -10,4 +10,5 @@ router.post("/resume", protect, deleteResume);
 
 router.get("/profile/:userId", getPublicProfile);
 
+
 module.exports = router;

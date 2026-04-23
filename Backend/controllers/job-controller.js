@@ -122,7 +122,7 @@ exports.getJobById = async(req, res) => {
             applicant: userId,
         }).select("status");
         if(application){
-            applicationStatus = application.status:
+     applicationStatus = application.status;
         }
     }
 
@@ -146,9 +146,70 @@ exports.updatejob =async (req, res) => {
         }
     Object.assign(job, req.body);
     const updated = await job.save();
-    
+    res.json(updated);
     }catch(error){
- res.status(500).json({ message: err.messasge })
+       res.status(500).json({ message: err.messasge })
     }
 }
+exports.deleteJob = async (req, res) => {
+    try {
+        const job = await job.findById(req.params.id);
+        if(!job) return res.status(404).json({ message: "job not found"});
 
+        if (job.company.toString() !== req.user._id.toString()){
+            return res.status(403).json({ message: "Not authorized to delete this job"});
+
+        }
+        await deleteOne();
+        res
+
+    } catch (error) {
+        res.status(500)({})
+    }
+}
+exports.toggleCloseJob = async (req, res) => {
+    try {
+        const job = await job.findById(req.params.id);
+        if(!job) return res.status(404).json({ message: "job not found"});
+        if (job.company.toString() !== req.user._id.toString()){
+            return res.status(403).json({ message: "Not authorized to update this job"});   
+
+        }
+        job.isClosed = !job.isClosed;
+        await job.save();
+        res.json({ message: `Job is now ${job.isClosed ? "closed" : "open"}`});
+    }
+catch(error) {
+    res.status(500).json({ message: error.message });
+}
+};
+exports.getjobId = async (req, res) => {
+    try {
+        const { userId } = req.query;
+        const job = await Job.findById(req.params.id).populate(
+            "company",
+            "name companyName companyLogo"
+        );      
+        if (!job) {
+            return res.status(404).json({ message: "Job not found" });
+        }
+        let applicationStatus = null;
+
+        if (userId) {   
+            const application = await Application.findOne({
+                job: job._id,
+                applicant: userId,
+            }).select("status");    
+            if (application) {
+                applicationStatus = application.status;
+            }   
+        }
+
+        res.json({
+            ...job.toObject(),
+            applicationStatus,
+        });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};

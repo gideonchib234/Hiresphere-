@@ -72,7 +72,7 @@ const Login = () => {
       }
     };
     if(formState.success) {
-      return (
+      return ( 
         <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
           <motion.div
           initial={{ opacity: 0, scale: 0.9 }}

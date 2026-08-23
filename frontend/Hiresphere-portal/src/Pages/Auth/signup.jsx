@@ -1,17 +1,6 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import {
-  User, Mail,
-  Lock,
-  Upload,
-  Eye,
-  EyeOff,
-  UserCheck,
-  Building2,
-  CheckCircle,
-  AlertCircle,
-  Loader,
-} from "lucide-react";
+import { User, Mail, Lock, Upload, Eye, EyeOff, UserCheck, Building2, CheckCircle, AlertCircle, Loader,} from "lucide-react";
 import { ValidateEmail } from "../Utils/helper";
 
 const Signup = () => {

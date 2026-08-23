@@ -78,4 +78,4 @@ module.exports = {
     updateProfile,
     deleteResume,
     getPublicProfile
-}
+};    

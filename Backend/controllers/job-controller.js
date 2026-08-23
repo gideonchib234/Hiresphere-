@@ -108,7 +108,7 @@ exports.getJobById = async(req, res) => {
     const {userId} = req.query;
 
     const job = await job.findbyId(req.params.Id).populate(
-        "compaany",
+        "company",
         "name companyName companyLogo"
     );
     if(!job){

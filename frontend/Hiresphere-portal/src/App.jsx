@@ -18,6 +18,8 @@ import ManageJobs from "./Pages/Employer/ManageJobs.jsx";
 import ApplicationViewer from "./Pages/Employer/ApplicationViewer.jsx";
 import EditprofileDetail from "./Pages/Employer/EditprofileDetail.jsx";
 import ProtectedRoute from "./Routes/ProtectedRoutes.jsx"; 
+import JobBrowser from "./Pages/Jobseeker/JobBrowser.jsx";
+import JobDetails from "./Pages/Jobseeker/JobDetails.jsx";
 
  
 
@@ -32,6 +34,8 @@ const App = () => {
        <Route path="/login" element={<Login/>}/>
       <Route path="/forgot-password" element={<ForgotPassword/>}/>
       <Route path="/reset-password" element={<ResetPassword/>}/>
+      <Route path="/jobs" element={<JobBrowser/>}/>
+      <Route path="/jobs/:id" element={<JobDetails/>}/>
 
        {/*Protected Jobseeker routes */}
        <Route element={<ProtectedRoute requiredRole="jobseeker"/>}>

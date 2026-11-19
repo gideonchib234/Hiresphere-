@@ -1,10 +1,10 @@
 import {motion} from 'framer-motion'
 import {Search, ArrowRight, Users, Building2, TrendingUp } from 'lucide-react';
 import {useNavigate} from 'react-router-dom'; 
+import { useAuth } from "../../../context/authcontext.jsx";
 
 const HeroSection = () => {
-    const isAuthenticated = true 
-    const user = {fullName: "Alex", role: "employer"}
+    const { isAuthenticated, user } = useAuth();
 
     const navigate = useNavigate()
     
@@ -52,7 +52,7 @@ const HeroSection = () => {
                     whileTap={{scale: 0.98}}
                     className='group bg-linear-to-r from-blue-600 to-purple-600 text-white px-8 py-4 rounded-xl font-semibold text-lg hover:to-purple-700 
                     transition-all duration-300 shadow-lg hover:shadow-xl flex items-center space-x-0.5 '
-                    onClick={() => navigate('/savedjobs')}
+                    onClick={() => navigate(isAuthenticated ? '/jobs' : '/login')}
                     >
                     <Search className='w-5 h-5'/>
                       <span>Explore Jobs</span>
@@ -63,15 +63,7 @@ const HeroSection = () => {
                     whileTap={{scale: 0.98}}
                     className='bg-white border-2 border-gray-200 text-gray-700 px-8 py-4 rounded-xl font-semibold text-lg
                      hover:bg-gray-50 transition-all duration-300 shadow-sm hover:shadow-lg'
-                    onClick={() =>  {
-                        navigate
-                        isAuthenticated && user?.role === "employer"
-                         ?"/employer-dashboard"
-                         : "/login"
-                    
-                    
-                    }  
-                 }   >
+                    onClick={() => navigate(isAuthenticated && user?.role === "employer" ? "/employer-dashboard" : "/signup")}>
                     Hire Talent
                  </motion.button>
                  </motion.div>

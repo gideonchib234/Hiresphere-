@@ -2,11 +2,14 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import {Briefcase} from "lucide-react";
 import {motion} from "framer-motion";
+import { useAuth } from "../../../context/authcontext.jsx";
 
 const Header = () => {
-    const isAuthenticated = true; 
-    const user = { name: "John Doe", role: "employer" }; 
+    const { isAuthenticated, user } = useAuth();
     const navigate = useNavigate();
+    const goToDashboardLogin = () => navigate("/login", {
+        state: { from: { pathname: "/jobseeker-dashboard" } },
+    });
 
     return (
         <motion.header
@@ -25,7 +28,7 @@ const Header = () => {
         </div>    
             <div className="flex items-center space-x-6">
                 <nav className="hidden md:flex space-x-6">
-                    <a onClick={() => navigate("/jobseeker")} className="text-gray-700 hover:text-blue-600 cursor-pointer transition">Find jobs</a>
+                    <a onClick={() => navigate("/jobs")} className="text-gray-700 hover:text-blue-600 cursor-pointer transition">Find jobs</a>
                      <a onClick={() => {navigate(isAuthenticated && user?.role === "employer"
                         ?"/employer-dashboard"
                         : "/login")}}
@@ -35,29 +38,16 @@ const Header = () => {
 
                </nav> 
                 <div className="flex items-center space-x-4">
-                     {isAuthenticated ? (
-                        <div className="flex items-center space-x-4">
-                            <span className="text-gray-700">Welcome, {user?.name}</span>
-                            <a href={user?.role === "employer"
-                                ? "/employer-dashboard"
-                                : "/jobseeker-dashboard"
-                        
-                            }   className="px-4 py-2 bg-linear-to-r from-blue-600 to-purple-600 text-white rounded-lg hover:from-purple-700 hover:to-indigo-700 transition">
-                                Dashboard
-                            </a>
-                        </div>
-                     ): (
+                    {isAuthenticated && <span className="hidden text-gray-700 sm:inline">Welcome, {user?.name}</span>}
+                    {!isAuthenticated && (
                         <>
-                        <a href="/login"
-                            className="text-gray-700 hover:text-gray-6=900 transition-colors font-medium px-4 py-2 rounded-lg hover:bg-gray-50">
-                            Login
-                        </a>
-                        <a href="/signup"
-                            className="px-4 py-2 bg-linear-to-r from-blue-600 to-purple-600 text-white rounded-lg hover:from-purple-700 hover:to-indigo-700 transition"> 
-                            Sign Up
-                        </a>
+                            <button onClick={() => navigate("/login")} className="rounded-lg px-3 py-2 font-medium text-gray-700 transition-colors hover:bg-gray-50 hover:text-blue-600">Login</button>
+                            <button onClick={() => navigate("/signup")} className="rounded-lg px-3 py-2 font-medium text-gray-700 transition-colors hover:bg-gray-50 hover:text-blue-600">Sign Up</button>
                         </>
-                     )} 
+                    )}
+                    <button onClick={goToDashboardLogin} className="rounded-lg bg-linear-to-r from-blue-600 to-purple-600 px-4 py-2 text-white transition hover:from-purple-700 hover:to-indigo-700">
+                        Dashboard
+                    </button>
                 </div>
             </div>
         </div>

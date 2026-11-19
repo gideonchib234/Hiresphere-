@@ -1,6 +1,6 @@
 import React from "react";
 import {motion} from "framer-motion";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { Mail,
         Lock, 
         Eye,
@@ -11,6 +11,7 @@ import { Mail,
        Key
   } from "lucide-react";
 import { ValidateEmail } from "../Utils/helper";
+import { useAuth } from "../../context/authcontext.jsx";
 
 const Login = () => { 
   const [formData, setFormData] = React.useState({
@@ -25,6 +26,8 @@ const Login = () => {
     success: false
   });
   const navigate = useNavigate();
+  const location = useLocation();
+  const { login } = useAuth();
   
   const validatePassword = (password) => {
     if (!password) return "Password is required"
@@ -60,9 +63,14 @@ const Login = () => {
       setFormState(prev => ({ ...prev, loading: true }));
       try {
         // Placeholder for actual submit logic
-        setTimeout(() => {
-          setFormState(prev => ({ ...prev, loading: false, success: true }));
-        }, 2000);
+        await new Promise((resolve) => setTimeout(resolve, 700));
+        const role = location.state?.from?.pathname === "/jobseeker-dashboard"
+          ? "jobseeker"
+          : formData.email.toLowerCase().includes("hire") ? "employer" : "jobseeker";
+        login({ name: formData.email.split("@")[0], email: formData.email, role });
+        setFormState(prev => ({ ...prev, loading: false, success: true }));
+        const destination = location.state?.from?.pathname || (role === "employer" ? "/employer-dashboard" : "/jobseeker-dashboard");
+        setTimeout(() => navigate(destination, { replace: true }), 700);
       } catch (err) {
         setFormState(prev => ({ ...prev, loading: false,
           errors:{

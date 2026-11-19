@@ -2,8 +2,12 @@ import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { User, Mail, Lock, Upload, Eye, EyeOff, UserCheck, Building2, CheckCircle, AlertCircle, Loader,} from "lucide-react";
 import { ValidateEmail } from "../Utils/helper";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/authcontext.jsx";
 
 const Signup = () => {
+  const navigate = useNavigate();
+  const { login } = useAuth();
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
@@ -75,8 +79,10 @@ const Signup = () => {
     try {
       // Replace with real API call. This is a mock to keep UI responsive.
       await new Promise((res) => setTimeout(res, 1400));
+      login({ name: formData.fullName, email: formData.email, role: formData.role });
 
       setFormState((prev) => ({ ...prev, loading: false, success: true }));
+      setTimeout(() => navigate(formData.role === "employer" ? "/employer-dashboard" : "/jobseeker-dashboard"), 900);
     } catch (err) {
       setFormState((prev) => ({
         ...prev,

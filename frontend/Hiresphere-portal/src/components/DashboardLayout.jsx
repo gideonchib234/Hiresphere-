@@ -60,8 +60,10 @@ const DashboardLayout = ({ role = "jobseeker", title, children }) => {
               <p className="text-sm font-semibold text-slate-900">{user?.name || user?.fullName || "Hiresphere User"}</p>
               <p className="text-xs capitalize text-slate-500">{role}</p>
             </div>
-            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-blue-100 to-purple-100 text-sm font-bold text-indigo-800">
-              {(user?.name || user?.fullName || "HU").slice(0, 2).toUpperCase()}
+            <div className="flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-full bg-gradient-to-br from-blue-100 to-purple-100 text-sm font-bold text-indigo-800">
+              {user?.avatar
+                ? <img src={user.avatar} alt="" className="h-full w-full object-cover" />
+                : (user?.name || user?.fullName || "HU").slice(0, 2).toUpperCase()}
             </div>
           </div>
         </header>

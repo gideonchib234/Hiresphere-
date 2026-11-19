@@ -8,6 +8,7 @@ import {
   Users,
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { getTimeGreeting } from "../../Pages/Utils/helper";
 
 const activeJobs = [
   { title: "Senior Frontend Developer", location: "Remote", applicants: 24, status: "Active", color: "bg-blue-100 text-blue-700" },
@@ -21,7 +22,7 @@ const candidates = [
   { initials: "SO", name: "Sofia Ortiz", title: "Growth Marketer", role: "Growth Marketing Manager", status: "Shortlisted", color: "bg-emerald-100 text-emerald-700" },
 ];
 
-export const EmployerWelcome = () => {
+export const EmployerWelcome = ({ firstName }) => {
   const navigate = useNavigate();
   return (
     <section className="relative overflow-hidden rounded-[28px] bg-gradient-to-r from-blue-700 via-indigo-700 to-purple-700 px-6 py-7 text-white shadow-xl shadow-indigo-950/10 sm:px-9 sm:py-9">
@@ -30,7 +31,7 @@ export const EmployerWelcome = () => {
       <div className="relative flex flex-col justify-between gap-6 md:flex-row md:items-center">
         <div>
           <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-3 py-1.5 text-xs font-medium text-blue-100">
-            <CalendarDays size={14} /> Hiring overview <span className="text-white/40">·</span> Today
+            <CalendarDays size={14} /> {getTimeGreeting()}, {firstName} <span className="text-white/40">·</span> Hiring overview
           </div>
           <h2 className="text-3xl font-semibold tracking-tight sm:text-[38px]">Build your next great team.</h2>
           <p className="mt-3 max-w-xl text-sm leading-6 text-blue-100/80 sm:text-base">Your hiring is moving forward. Review new candidates and keep your best opportunities visible.</p>

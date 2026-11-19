@@ -64,12 +64,19 @@ const Login = () => {
       try {
         // Placeholder for actual submit logic
         await new Promise((resolve) => setTimeout(resolve, 700));
-        const role = location.state?.from?.pathname === "/jobseeker-dashboard"
+        const requestedPath = location.state?.from?.pathname;
+        const requestedRole = requestedPath === "/jobseeker-dashboard"
           ? "jobseeker"
-          : formData.email.toLowerCase().includes("hire") ? "employer" : "jobseeker";
-        login({ name: formData.email.split("@")[0], email: formData.email, role });
+          : requestedPath === "/employer-dashboard" ? "employer" : null;
+        const email = formData.email.trim().toLowerCase();
+        const account = JSON.parse(localStorage.getItem(`hiresphere:account:${email}`) || "null");
+        const emailName = email.split("@")[0]
+          .replace(/[._-]+/g, " ")
+          .replace(/\b[a-z]/g, (letter) => letter.toUpperCase());
+        const userRole = requestedRole || account?.role || (email.includes("hire") ? "employer" : "jobseeker");
+        login({ name: account?.name || emailName, email, role: userRole, avatar: account?.avatar || null });
         setFormState(prev => ({ ...prev, loading: false, success: true }));
-        const destination = location.state?.from?.pathname || (role === "employer" ? "/employer-dashboard" : "/jobseeker-dashboard");
+        const destination = location.state?.from?.pathname || (userRole === "employer" ? "/employer-dashboard" : "/jobseeker-dashboard");
         setTimeout(() => navigate(destination, { replace: true }), 700);
       } catch (err) {
         setFormState(prev => ({ ...prev, loading: false,

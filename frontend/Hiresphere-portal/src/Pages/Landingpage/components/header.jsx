@@ -5,7 +5,7 @@ import {motion} from "framer-motion";
 import { useAuth } from "../../../context/authcontext.jsx";
 
 const Header = () => {
-    const { isAuthenticated, user } = useAuth();
+    const { isAuthenticated } = useAuth();
     const navigate = useNavigate();
     const goToDashboardLogin = () => navigate("/login", {
         state: { from: { pathname: "/jobseeker-dashboard" } },
@@ -20,11 +20,11 @@ const Header = () => {
          >
         <div className="container mx-auto px-4">
             <div className="flex items-center justify-between h-16">
-                <div className="flex items-center space-x-2">
-            <div className="w-8 h-8 bg-linear-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center">
-              <Briefcase className="w-5 h-5 text-white" />
+                <div className="flex items-center space-x-3">
+                <div className="flex h-11 w-11 items-center justify-center rounded-full bg-linear-to-r from-blue-500 to-purple-500">
+                  <Briefcase className="h-6 w-6 text-white" />
           </div>
-            <span className="text-xl font-bold text-gray-900">Hiresphere</span>
+                <span className="text-2xl font-bold text-gray-900">Hiresphere</span>
         </div>    
             <div className="flex items-center space-x-6">
                 <nav className="hidden md:flex space-x-6">
@@ -38,7 +38,6 @@ const Header = () => {
 
                </nav> 
                 <div className="flex items-center space-x-4">
-                    {isAuthenticated && <span className="hidden text-gray-700 sm:inline">Welcome, {user?.name}</span>}
                     {!isAuthenticated && (
                         <>
                             <button onClick={() => navigate("/login")} className="rounded-lg px-3 py-2 font-medium text-gray-700 transition-colors hover:bg-gray-50 hover:text-blue-600">Login</button>

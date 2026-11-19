@@ -53,8 +53,38 @@ const Signup = () => {
       return;
     }
 
-    setFormData((prev) => ({ ...prev, avatar: file }));
-    setFormState((prev) => ({ ...prev, avatarPreview: URL.createObjectURL(file), errors: { ...prev.errors, avatar: "" } }));
+    const reader = new FileReader();
+    reader.onerror = () => {
+      setFormState((prev) => ({ ...prev, errors: { ...prev.errors, avatar: "Could not read this image. Please try another file." } }));
+    };
+    reader.onload = () => {
+      if (typeof reader.result !== "string") {
+        setFormState((prev) => ({ ...prev, errors: { ...prev.errors, avatar: "Could not read this image. Please try another file." } }));
+        return;
+      }
+      const image = new Image();
+      image.onerror = () => {
+        setFormState((prev) => ({ ...prev, errors: { ...prev.errors, avatar: "Could not load this image. Please try another file." } }));
+      };
+      image.onload = () => {
+        const maxDimension = 360;
+        const scale = Math.min(1, maxDimension / Math.max(image.width, image.height));
+        const canvas = document.createElement("canvas");
+        canvas.width = Math.max(1, Math.round(image.width * scale));
+        canvas.height = Math.max(1, Math.round(image.height * scale));
+        const context = canvas.getContext("2d");
+        if (!context) {
+          setFormState((prev) => ({ ...prev, errors: { ...prev.errors, avatar: "Could not process this image. Please try another file." } }));
+          return;
+        }
+        context.drawImage(image, 0, 0, canvas.width, canvas.height);
+        const avatarPreview = canvas.toDataURL("image/jpeg", 0.82);
+        setFormData((prev) => ({ ...prev, avatar: file }));
+        setFormState((prev) => ({ ...prev, avatarPreview, errors: { ...prev.errors, avatar: "" } }));
+      };
+      image.src = reader.result;
+    };
+    reader.readAsDataURL(file);
   };
 
   const validateForm = () => {
@@ -79,7 +109,12 @@ const Signup = () => {
     try {
       // Replace with real API call. This is a mock to keep UI responsive.
       await new Promise((res) => setTimeout(res, 1400));
-      login({ name: formData.fullName, email: formData.email, role: formData.role });
+      const email = formData.email.trim().toLowerCase();
+      localStorage.setItem(
+        `hiresphere:account:${email}`,
+        JSON.stringify({ name: formData.fullName.trim(), role: formData.role, avatar: formState.avatarPreview })
+      );
+      login({ name: formData.fullName.trim(), email, role: formData.role, avatar: formState.avatarPreview });
 
       setFormState((prev) => ({ ...prev, loading: false, success: true }));
       setTimeout(() => navigate(formData.role === "employer" ? "/employer-dashboard" : "/jobseeker-dashboard"), 900);

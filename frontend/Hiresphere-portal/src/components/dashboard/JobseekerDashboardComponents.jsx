@@ -9,6 +9,7 @@ import {
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { mockJobs } from "../../Pages/Utils/mockJobs";
+import { getTimeGreeting } from "../../Pages/Utils/helper";
 
 const applications = [
   { company: "Northstar Labs", title: "Frontend Engineer", date: "Today", status: "In review", color: "bg-blue-100 text-blue-700", initials: "N" },
@@ -28,7 +29,7 @@ export const JobseekerWelcome = ({ firstName }) => {
           <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-3 py-1.5 text-xs font-medium text-blue-100">
             <Sparkles size={14} /> Your next chapter starts here
           </div>
-          <h2 className="text-3xl font-semibold tracking-tight sm:text-[38px]">Good morning, {firstName}<span className="text-blue-300">.</span></h2>
+          <h2 className="text-3xl font-semibold tracking-tight sm:text-[38px]">{getTimeGreeting()}, {firstName}<span className="text-blue-300">.</span></h2>
           <p className="mt-3 max-w-xl text-sm leading-6 text-blue-100/80 sm:text-base">You’re making great progress. Explore fresh opportunities picked for your experience and goals.</p>
           <button onClick={() => navigate("/jobs")} className="mt-6 inline-flex items-center gap-2 rounded-xl bg-white px-5 py-3 text-sm font-semibold text-indigo-800 shadow-sm transition hover:bg-blue-50">
             <Search size={17} /> Find your next role <ArrowRight size={16} />

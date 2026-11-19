@@ -1,6 +1,7 @@
 import { BriefcaseBusiness, Eye, Users } from "lucide-react";
 import DashboardLayout from "../../components/DashboardLayout";
 import DashboardStatCard from "../../components/dashboard/DashboardStatCard";
+import { useAuth } from "../../context/authcontext.jsx";
 import {
   ActiveJobsPanel,
   EmployerWelcome,
@@ -9,6 +10,8 @@ import {
 } from "../../components/dashboard/EmployerDashboardComponents";
 
 const EmployerDashboard = () => {
+  const { user } = useAuth();
+  const firstName = (user?.name || user?.fullName || "there").split(" ")[0];
   const metrics = [
     { label: "Active job listings", value: "6", note: "+2 this month", icon: BriefcaseBusiness, iconStyle: "bg-blue-50 text-blue-700" },
     { label: "Total applicants", value: "124", note: "+18% this week", icon: Users, iconStyle: "bg-violet-50 text-violet-700" },
@@ -18,7 +21,7 @@ const EmployerDashboard = () => {
   return (
     <DashboardLayout role="employer" title="Overview">
       <div className="mx-auto max-w-[1440px] space-y-7">
-        <EmployerWelcome />
+        <EmployerWelcome firstName={firstName} />
         <section className="grid gap-4 md:grid-cols-3">
           {metrics.map((metric) => <DashboardStatCard key={metric.label} {...metric} />)}
         </section>
